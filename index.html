@@ -1,96 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Video Gallery</title>
-        <style>
-            body {
-                  margin: 0;
+      <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Video Gallery</title>
+            <style>
+                  body {
+                        margin: 0;
                         padding: 10px;
-                              background: #111;
-                                    display: grid;
-                                          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                                                gap: 10px;
-                                                    }
-                                                        video {
-                                                              width: 100%;
-                                                                    aspect-ratio: 9 / 16;
-                                                                          background: #222;
-                                                                                border-radius: 10px;
-                                                                                      object-fit: cover;
-                                                                                            cursor: pointer;
-                                                                                                }
-                                                                                                    #overlay {
-                                                                                                          position: fixed;
-                                                                                                                top: 0; left: 0;
-                                                                                                                      width: 100%; height: 100%;
-                                                                                                                            background: rgba(0, 0, 0, 0.95);
-                                                                                                                                  display: none;
-                                                                                                                                        justify-content: center;
-                                                                                                                                              align-items: center;
-                                                                                                                                                    z-index: 1000;
-                                                                                                                                                        }
-                                                                                                                                                            #overlay video {
-                                                                                                                                                                  width: 90%;
-                                                                                                                                                                        max-height: 90%;
-                                                                                                                                                                              border-radius: 12px;
-                                                                                                                                                                                  }
-                                                                                                                                                                                      #overlay span {
-                                                                                                                                                                                            position: absolute;
-                                                                                                                                                                                                  top: 20px; right: 30px;
-                                                                                                                                                                                                        font-size: 32px; color: white;
-                                                                                                                                                                                                              cursor: pointer;
-                                                                                                                                                                                                                  }
-                                                                                                                                                                                                                    </style>
-                                                                                                                                                                                                                    </head>
-                                                                                                                                                                                                                    <body>
+                        background: #111;
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                        gap: 10px;
+                  }
 
-                                                                                                                                                                                                                      <!-- All videos play simultaneously with progressive chunk streaming -->
-                                                                                                                                                                                                                        <video src="5_6071188121188309695.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                          <video src="video_20250908_134247_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                            <video src="video_20250908_134647_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                              <video src="video_20250908_134202_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                <video src="video_20250908_135110_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                  <video src="5_6071188121188309698.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                    <video src="5_6071188121188309699.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                      <video src="5_6071188121188309701.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                        <video src="5_6071188121188309702.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                          <video src="5_6132181991140890792.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                            <video src="5_6132181991140890793.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                              <video src="5_6132181991140890799.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                                <video src="5_6132181991140890797.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                                  <video src="5_6194862653664401344.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                                    <video src="video_20250908_135630_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
-                                                                                                                                                                                                                                                      <video src="5_6194862653664401339.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+                  video {
+                        width: 100%;
+                        aspect-ratio: 9 / 16;
+                        background: #222;
+                        border-radius: 10px;
+                        object-fit: cover;
+                        cursor: pointer;
+                  }
 
-                                                                                                                                                                                                                                                        <!-- Fullscreen Player -->
-                                                                                                                                                                                                                                                          <div id="overlay">
-                                                                                                                                                                                                                                                              <span onclick="closeOverlay()">✖</span>
-                                                                                                                                                                                                                                                                  <video id="overlayVideo" controls autoplay loop></video>
-                                                                                                                                                                                                                                                                    </div>
+                  #overlay {
+                        position: fixed;
+                        inset: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.95);
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 1000;
+                  }
 
-                                                                                                                                                                                                                                                                      <script>
-                                                                                                                                                                                                                                                                          function zoomVideo(src) {
-                                                                                                                                                                                                                                                                                const overlay = document.getElementById("overlay");
-                                                                                                                                                                                                                                                                                      const overlayVideo = document.getElementById("overlayVideo");
-                                                                                                                                                                                                                                                                                            overlay.style.display = "flex";
-                                                                                                                                                                                                                                                                                                  overlayVideo.src = src;
-                                                                                                                                                                                                                                                                                                        overlayVideo.play();
-                                                                                                                                                                                                                                                                                                            }
+                  #overlay video {
+                        width: 90%;
+                        max-height: 90%;
+                        border-radius: 12px;
+                  }
 
-                                                                                                                                                                                                                                                                                                                function closeOverlay() {
-                                                                                                                                                                                                                                                                                                                      const overlay = document.getElementById("overlay");
-                                                                                                                                                                                                                                                                                                                            const overlayVideo = document.getElementById("overlayVideo");
-                                                                                                                                                                                                                                                                                                                                  overlay.style.display = "none";
-                                                                                                                                                                                                                                                                                                                                        overlayVideo.pause();
-                                                                                                                                                                                                                                                                                                                                              overlayVideo.removeAttribute("src");
-                                                                                                                                                                                                                                                                                                                                                    overlayVideo.load();
-                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                          </script>
+                  #overlay span {
+                        position: absolute;
+                        top: 20px;
+                        right: 30px;
+                        font-size: 32px;
+                        color: white;
+                        cursor: pointer;
+                  }
+            </style>
+      </head>
+      <body>
+            <!-- All videos play simultaneously with progressive chunk streaming -->
+            <video src="5_6071188121188309695.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="video_20250908_134247_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="video_20250908_134647_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="video_20250908_134202_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="video_20250908_135110_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6071188121188309698.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6071188121188309699.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6071188121188309701.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6071188121188309702.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6132181991140890792.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6132181991140890793.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6132181991140890799.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6132181991140890797.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6194862653664401344.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="video_20250908_135630_edit.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
+            <video src="5_6194862653664401339.mp4" autoplay muted loop playsinline preload="metadata" onclick="zoomVideo(this.src)"></video>
 
-                                                                                                                                                                                                                                                                                                                                                          </body>
-                                                                                                                                                                                                                                                                                                                                                          </html>
+            <!-- Fullscreen Player -->
+            <div id="overlay">
+                  <span onclick="closeOverlay()">✖</span>
+                  <video id="overlayVideo" controls autoplay loop></video>
+            </div>
+
+            <script>
+                  function zoomVideo(src) {
+                        const overlay = document.getElementById("overlay");
+                        const overlayVideo = document.getElementById("overlayVideo");
+
+                        overlay.style.display = "flex";
+                        overlayVideo.src = src;
+                        overlayVideo.play();
+                  }
+
+                  function closeOverlay() {
+                        const overlay = document.getElementById("overlay");
+                        const overlayVideo = document.getElementById("overlayVideo");
+
+                        overlay.style.display = "none";
+                        overlayVideo.pause();
+                        overlayVideo.removeAttribute("src");
+                        overlayVideo.load();
+                  }
+            </script>
+      </body>
+</html>
 
 
                                                                                                                                                                                                                                                                                                                                                           
